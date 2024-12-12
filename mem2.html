@@ -34,30 +34,26 @@ Faster, efficient solutions are vital in applications like GPS, healthcare, AI, 
   <p><strong>Ans:</br></strong><strong>Hierarchical Data & Tree Data Structures</br></strong>
   Hierarchical data shows parent-child relationships and can be effectively represented using tree data structures. These trees have special properties that make operations faster, depending on their type and purpose.
 </br></br>
-<strong>General Tree:</br></strong>
-A binary search tree (BST) is a special kind of binary tree where the left child is smaller, and the right child is greater than the parent. It allows efficient searching and inserting with an average time of O(log n). But if it gets unbalanced, performance can drop to O(n).</br></br>
-<strong>AVL Tree:</br></strong>An AVL Tree is a balanced version of a binary search tree. It keeps itself balanced by ensuring a strict condition at every node. Because of this, operations like searching, inserting, and deleting have a guaranteed time of O(log n), even in the worst case. It's ideal for real-time systems.
+<strong>General Tree:</br></strong>A tree can be expressed in binaey ternary and n-ary forms,but expressing in those forms created confusions in naming them like 1st left,second left,1st right, or something other therefore expressing binary tree is more efficient.
+<strong>Binary Search tree:</br><strong>In binary search tree we will move the child which is less the parent to the left and child which is larger than the parent to the right.The inorder traversal of the BST always gives the numbers in sorted order.Binary search tree can create skewed trees. 
+<strong>2-3 Tree:</br></strong>In order to balance binary search tree we moved to the notation of introducing more than one item in a node,however this could still introduce the skeweness in the tree hence we next go for AVL-tree.
 </br></br>
 <strong>Red-Black Tree:</br></strong>A Red-Black Tree is another type of self-balancing binary search tree. It uses a color system (red or black) to quickly balance itself, requiring fewer adjustments than AVL trees. It works efficiently for tasks like database indexing and managing ordered data.
 </br></br>
 <strong>2-3 Tree:</br></strong>A 2-3 tree is a balanced tree where each node can have two or three children. It is great for database indexing and supports efficient searching and inserting with a time complexity of O(log n). It's an alternative to B-Trees for managing ordered datasets.
+<strong>AVL-tree:</strong>AVL tree is balancing the BST by rotating the unbalanced part.It can be single rotation or double rotation.
+ <strong>Red black tree:</strong>In order to reduce the number of rotations we resort to red black tree.
 </br></br><strong>Heap:</br></strong>A heap is a type of tree that maintains a property where the largest or smallest value is always at the root. Heaps are used in priority queues, scheduling tasks, and sorting. They allow fast access to the maximum or minimum value in O(1) time and insertion or deletion in O(log n).
 </br></br><strong>Trie:</br></strong>A Trie, or prefix tree, is a tree optimized for storing and searching strings. Each branch represents a single character, which makes prefix-based lookups very fast. They're commonly used in features like autocomplete, dictionary lookups, or routing. However, they use a lot of memory for very large datasets.
-</br></br><strong>Choosing the Right Tree:</br></strong><strong>Trie:</strong>Best for autocomplete or prefix-based searches.</br>
-</br><strong>Heap:</strong> Great for priority queues or task scheduling.</br>
-</br><strong>AVL Tree or Red-Black Tree:</strong>Use these for frequent searching and inserting in ordered data.</br>
-</br><strong>General Trees:</strong>Best for situations with simple parent-child relationships that don't need balancing.</br></p>
 
 <p>5.The need of array query algorithms and their implications. Their applications and principles need to be discussed</p>
  <p><strong>Ans:</br></strong><strong>The Need for Array Query Algorithms:</br></strong>
- Array query algorithms help us quickly search, retrieve, and update data in arrays. Arrays store data in consecutive memory spaces, but without efficient algorithms, operations on large arrays can become very slow. These algorithms save time and make data processing faster, especially when dealing with big datasets.
-</br></br>
-<strong>Why We Need Them:</br></strong>We need array query algorithms because they make data operations much faster. Searching through an unsorted list can take a lot of time, but with optimized algorithms, tasks like searching can be done in much less time. These algorithms are essential for real-time systems, big data, and database searches.
+ Array query algorithms are designed to efficiently answer questions about data stored in arrays, such as retrieving specific values, computing aggregates (e.g., sum, maximum, minimum), or updating values under constraints. As arrays are a fundamental data structure, these algorithms are crucial for optimizing performance in various scenarios.
 </br></br>
 <strong>Principles of Array Query Algorithms:</br></strong>
 Array query algorithms are based on a few key ideas:</br>
-<strong>1.Efficient Searching:</strong>Instead of checking every item, methods like binary search speed up the process.</br>
-<strong>2.Preprocessing Data:</strong>Preparing data in a certain way to make future searches faster.</br>
+<strong>1.Preprocessing:</strong>Transform the array or compute auxiliary data to enable faster queries (e.g., prefix sums, sparse tables).</br>
+<strong>2.Divide and Conquer:</strong>Divide the problem into smaller subproblems, solve them independently, and combine results (e.g., segment trees).</br>
 <strong>3.Divide and Conquer:</br></strong>Breaking problems into smaller parts to solve them faster.</br>
 <strong>4.Efficient Memory Use:</strong>Ensuring the algorithms use minimal memory while working quickly.</br></br>
 <strong>Applications:</br></strong>Array query algorithms are used in many areas. They help search and sort data quickly in databases, make fast decisions in real-time systems like traffic and stock trading, and power search engines to find web information quickly. They also make it easier to study large data in big data and help predict things like weather or science models. These algorithms make handling data faster and simpler.</br>
