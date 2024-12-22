@@ -28,7 +28,7 @@ Faster, efficient solutions are vital in applications like GPS, healthcare, AI, 
 <strong>Search Problems:</strong> Locating specific information from a large dataset (like finding a word in a dictionary).</br></p>
 
 <p>3.Take away from different design principles from chapter 2</p>
- <p></p>
+ <p>In creating a hash table we need to choose a data structure that supports fast indexing and efficient handling of collision.We need to use a simple yet effective algorithm to generate hash values.We need to use well designed hash function that is less prone to collisions.</p>
 
 <p>4.The hierarchical data and how different tree data structures solve and optimize over the problem scenarios (tree, bst, avl, 2-3, red-black, heap, trie)</p>
   <p><strong>Ans:</br></strong><strong>Hierarchical Data & Tree Data Structures</br></strong>
@@ -60,12 +60,13 @@ Array query algorithms are based on a few key ideas:</br>
 <strong>Implications:</br></strong>Using the right array query algorithms makes data operations faster and helps systems run smoothly. Using the wrong methods can slow everything down. These algorithms are important for handling large amounts of data quickly and keeping systems working well. In short, they make searching and managing data faster in real-life situations.</br></br></p>
 
 <p>6.Differentiate between tree and graphs and their traversals. The applications of each</p>
-<p><strong>Ans:</br>Difference Between Trees and Graphs:</br></strong>A tree is a special kind of graph with a clear structure where each node has only one parent (except the root), and there are no loops or cycles. A graph, on the other hand, is more general. It connects nodes in many ways, allowing loops, multiple paths, or no connection at all. Trees always have a single path between two nodes, while graphs can have several paths or none.
+<p><strong>Ans:</br>Difference Between Trees and Graphs:</br></strong>A tree is acyclic and connected whereas a graph is cyclic or acyclic,connected or disconnected.In trees there are n-1 edges for n nodes whereas in graphs the number of edges varies and there is no specific formula for that.
 </br></br><strong>Traversals:</br></strong>
 In trees, we can visit nodes in different orders:</br>
-<strong>Preorder: </strong>Visit the node first, then its left and right children.</br>
+</br></br><strong>DEPTH FIRST SEARCH:</br></strong>
+<strong>Preorder: </strong>Visit the node first, then its left and right children.Example: Used in expression trees to generate prefix expressions.</br>
 <strong>Inorder: </strong>Visit the left child, then the node, then the right child (used for sorting in binary search trees).</br>
-<strong>Postorder:</br></strong> Visit left and right children, then the node.</br>
+<strong>Postorder:</br></strong> Visit left and right children, then the node.Example: Used in expression trees to generate postfix expressions</br>
 <strong>Level-order:</br></strong> Visit nodes one level at a time.</br>   In graphs we use BFS and DFS traversals.</br>Trees are great for organizing data. For example, binary search trees make searching and inserting data fast. Heaps are used for sorting and managing priorities, and tries are useful for things like autocomplete and dictionaries. Trees also represent family trees and file systems.
 Graphs are better for showing complex connections. They are used in social networks to show friendships, in maps to find routes, in web crawling to explore the internet, and in electric circuits to show how parts are connected.
 In simple terms, trees are best for simple structures, and graphs are used for complicated connections.</p>
@@ -98,5 +99,4 @@ Sorting is used everywhere! For example:</br>
 <strong>Dynamic Programming :</br></strong>Dynamic programming solves overlapping subproblems and stores results to avoid repetition. It is used in algorithms like Matrix Chain Multiplication and Optimal Binary Search Tree, helping with optimization in resource allocation and scheduling.</br>
 <strong>Greedy algorithm:</br></strong>Greedy algorithms make the best immediate choices to find an overall solution. They are used in Kruskal’s and Prim’s for minimum spanning trees and Dijkstra’s Algorithm for shortest paths, helping with network design and resource management.</br>
 <strong>Backtracking:</br></strong>Backtracking explores all possible solutions, undoing steps when constraints are violated. It solves problems like N-Queens and is useful for puzzles, combinatorial problems, and constraint-based tasks like solving mazes.</br>
-<strong>Branch and Bound:</br></strong>Branch and bound systematically explores and prunes unpromising options to solve optimization problems like Job Scheduling and Travelling Salesman Problem, commonly used in logistics and project planning.</br>
-</p>
+
