@@ -145,133 +145,107 @@
     
         <h1>Data Structures and Algorithms </h1>
         <div class="container">
-        <h2>1. Problems in Nature</h2>
+        <h2>1. What are the kinds of problems we see in nature?</h2>
         <ul>
-            <li><strong>Iteration:</strong>: Solving problems using loops, real time example  climate change,school Schedules</li>
-            <li><strong>Recursion:</strong>:Used to solve problems by breaking them into smaller subproblems of the same type,examples Ants Following Food,Weeds in a Garden</li>
-            <li><strong>Backtracking:</strong>:Backtracking is a method of exploring all possible solutions and rejecting those that fail to satisfy constraints example Bees searching for flowers (pollination) ,Maze Solving.</li>
+            <li><strong>Iteration:</strong> Path finding: Bees and ants find optimal paths to food sources, resembling shortest path algorithms.</li>
+            <li><strong>Recursion:</strong> Animals migrate and make decisions based on resource availability similar to decision tree algorithm.</li>
+            <li><strong>Backtracking:</strong> Trial-and-error processes like ants finding food or birds building nests.</li>
         </ul>
     </div>
-    <h3></h3>
+    
     <div class="container">
-        <h2>2. Space and Time Efficiency</h2>
+        <h2>2. What is space and time efficiency? Why are they important? Explain the different classes of problems and orders of growth</h2>
         <ul>
-            <li><strong>Space Efficiency:</strong>Shows how quickly a task can be completed using an algorithm, especially when there’s a lot of data.</li>
-            <li><strong>Time Efficiency:</strong> Shows how much memory an algorithm needs to complete its task.</li>
+            <li><strong>Space Efficiency:</strong> Refers to the amount of memory (or storage) an algorithm uses during its execution. Example: An algorithm that requires less RAM is more space-efficient.</li>
+            <li><strong>Time Efficiency:</strong> Refers to how much time an algorithm takes to solve a problem as the input size increases. Example: An algorithm that runs faster as data grows is time-efficient.</li>
         </ul>
     
     
-        <h3>Order of Growth:</h3>
+        <h2>Why are They Important?</h2>
         <ul>
-            <li><code>O(1)</code> - Constant ,example: accessing one array index value </li>
-            <li><code>O(n)</code> - Linear, example: traversing an array.</li>
-            <li><code>O(n^3)</code> - Cubic</li>
-            <li><code>O(log n)</code> - Logarithmic,example : Binary search</li>
-            <li><code>O(n^2)</code> - Quadratic,example :Bubble sort</li>
-            <li><code>O(n log n)</code> - Linearithmic </li>
-            <li><code>O(n^k)</code> - Polynomial</li>
-            <li><code>O(2^n)</code> - Exponential</li>
-            <li><code>O(n!)</code> - Factorial</li>
+            <li><strong>Resource Management:</strong> Efficient algorithms save memory and time, which is crucial for limited resources in real-world systems.</li>
+            <li><strong>Scalability:</strong> With increasing input sizes, efficient algorithms ensure performance doesn’t degrade.</li>
+            <li><strong>Real-Time Applications:</strong> Faster, efficient solutions are vital in applications like GPS, healthcare, AI, and large-scale data processing.</li>
+            <li><strong>Different Classes of Problems</strong></li>
+            <li><strong>Computational Problems:</strong> Problems requiring algorithms for problem-solving (sorting, searching).</li>
+            <li><strong>Optimization Problems:</strong> Finding the best solution out of many possibilities (shortest path, resource allocation).</li>
+            <li><strong>Decision Problems:</strong> Determining whether a given condition is true or false for a problem.</li>
+            <li><strong>Search Problems:</strong> Locating specific information from a large dataset (like finding a word in a dictionary).</li>
         </ul>
-        <div class="note">
-            <p><strong>Best Case:</strong> Minimum time required under optimal conditions.</p>
-            <p><strong>Average Case:</strong> Expected time over all possible inputs.</p>
-            <p><strong>Worst Case:</strong> Maximum time required.</p>
-        </div>
-    </div>
-        <h3></h3>
-        <div class="container">
-        <h2>3. Design Principles</h2>
-        <p><ul>
-            <li><strong>Divide and Conquer:</strong>
-                Breaking the give data into smaller parts and solving them, and then combines the results. For example, in merge sort, we split the give data into smaller parts, sort them, and then combined.</li>
-        </ul></p>
     </div>
 
-    <h3></h3>
-        <div class="container">
-        <h2>4. Tree Data Structures</h2>
-        <ul>
-            <li><strong>BST (Binary Search Tree):</strong>A hierarchical tree structure where each item is placed to make searching, adding, and deleting faster. Left child &lt; root &lt; right child.</li>
-            <li><strong>AVL:</strong> A hierarchical binary search tree that keeps itself balanced, by rotations to keep height balanced.</li>
-            <li><strong>2-3 Tree:</strong> A variant of BST where nodes can have two or three children.</li>
-            <li><strong>Red-Black Tree:</strong> A balanced binary tree where the root is always black, and red nodes have specific properties to maintain balance.</li>
-            <li><strong>Heap:</strong>A hierarchical tree structure used to quickly find the highest or lowest priority data, like in a priority queue.</li>
-            <li><strong>Trie:</strong> A tree-like structure used for storing words in a way that allows fast lookup based on prefixes.</li>
-        </ul>
+    <div class="container">
+        <h2>3. Take away from different design principles from chapter 2</h2>
     </div>
-    <h3></h3>
-        <div class="container">
-        <h2>5. Array Query Algorithms</h2>
-        <p><ul>
-            <li> Array in real-time applications they allow quick access to data,</li>
+
+    <div class="container">
+        <h2>4. The hierarchical data and how different tree data structures solve and optimize over the problem scenarios (tree, bst, avl, 2-3, red-black, heap, trie)</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>Hierarchical Data & Tree Data Structures</strong></li>
+            <li>Hierarchical data shows parent-child relationships and can be effectively represented using tree data structures. These trees have special properties that make operations faster, depending on their type and purpose.</li>
+            <li><strong>General Tree:</strong> A binary search tree (BST) is a special kind of binary tree where the left child is smaller, and the right child is greater than the parent. It allows efficient searching and inserting with an average time of O(log n). But if it gets unbalanced, performance can drop to O(n).</li>
+            <li><strong>AVL Tree:</strong> An AVL Tree is a balanced version of a binary search tree. It keeps itself balanced by ensuring a strict condition at every node. Because of this, operations like searching, inserting, and deleting have a guaranteed time of O(log n), even in the worst case. It's ideal for real-time systems.</li>
+            <li><strong>Red-Black Tree:</strong> A Red-Black Tree is another type of self-balancing binary search tree. It uses a color system (red or black) to quickly balance itself, requiring fewer adjustments than AVL trees. It works efficiently for tasks like database indexing and managing ordered data.</li>
+            <li><strong>2-3 Tree:</strong> A 2-3 tree is a balanced tree where each node can have two or three children. It is great for database indexing and supports efficient searching and inserting with a time complexity of O(log n). It's an alternative to B-Trees for managing ordered datasets.</li>
+            <li><strong>Heap:</strong> A heap is a type of tree that maintains a property where the largest or smallest value is always at the root. Heaps are used in priority queues, scheduling tasks, and sorting. They allow fast access to the maximum or minimum value in O(1) time and insertion or deletion in O(log n).</li>
+            <li><strong>Trie:</strong> A Trie, or prefix tree, is a tree optimized for storing and searching strings. Each branch represents a single character, which makes prefix-based lookups very fast. They're commonly used in features like autocomplete, dictionary lookups, or routing. However, they use a lot of memory for very large datasets.</li>
+            <li><strong>Choosing the Right Tree:</strong></li>
             <ul>
-                <h4>Applications</h4>
-            <li>Used to quickly calculate the sum of elements in a specific range of an array.</li>
-            <li>Fenwick Trees:Used to efficiently calculate cumulative frequencies or sums</li></ul>
-            <h4>Implications:</h4>
-            <li> improve performance by reducing the time needed to process large amounts of data</li>
-        </ul></p>
-    </div>
-    <h3></h3>
-        <div class="container">
-        <h2>6. Difference Between Tree and Graph Traversals</h2>
-        <ul>
-            <li><strong>Tree:</strong> A hirearchical data structure which has nodes connected by edges, acyclic, exactly n-1 edges for n nodes <h4>Traversal:</h4> 
-                <ul><li>Preorder: rootnode-> leftnode->rightnode.</li>
-                    <li>Postorder: leftnode->rightnode->rootnode </li>
-                    <li>Inorder: leftnode->rootnode->rightnode</li>
-                    
+                <li><strong>Trie:</strong> Best for autocomplete or prefix-based searches.</li>
+                <li><strong>Heap:</strong> Great for priority queues or task scheduling.</li>
+                <li><strong>AVL Tree or Red-Black Tree:</strong> Use these for frequent searching and inserting in ordered data.</li>
+                <li><strong>General Trees:</strong> Best for situations with simple parent-child relationships that don't need balancing.</li>
             </ul>
-            </li>
-            <li><strong>Graph:</strong> A data structure which has vertices connected by edges , they are cyclic , they can have any number of edges up to n(n-1)/2
-                <h4>Traversal:</h4> 
-                <ul><li>Breadth First Search(BFS)</li>
-                    <li>Depth First Search(DFS)</li>
+        </ul>
+    </div>
 
+    <div class="container">
+        <h2>5. The need for array query algorithms and their implications. Their applications and principles need to be discussed</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>The Need for Array Query Algorithms:</strong> Array query algorithms help us quickly search, retrieve, and update data in arrays. Arrays store data in consecutive memory spaces, but without efficient algorithms, operations on large arrays can become very slow. These algorithms save time and make data processing faster, especially when dealing with big datasets.</li>
+            <li><strong>Why We Need Them:</strong> We need array query algorithms because they make data operations much faster. Searching through an unsorted list can take a lot of time, but with optimized algorithms, tasks like searching can be done in much less time. These algorithms are essential for real-time systems, big data, and database searches.</li>
+            <li><strong>Principles of Array Query Algorithms:</strong></li>
+            <ul>
+                <li><strong>Efficient Searching:</strong> Instead of checking every item, methods like binary search speed up the process.</li>
+                <li><strong>Preprocessing Data:</strong> Preparing data in a certain way to make future searches faster.</li>
+                <li><strong>Divide and Conquer:</strong> Breaking problems into smaller parts to solve them faster.</li>
+                <li><strong>Efficient Memory Use:</strong> Ensuring the algorithms use minimal memory while working quickly.</li>
+            </ul>
+            <li><strong>Applications:</strong> Array query algorithms are used in many areas. They help search and sort data quickly in databases, make fast decisions in real-time systems like traffic and stock trading, and power search engines to find web information quickly. They also make it easier to study large data in big data and help predict things like weather or science models. These algorithms make handling data faster and simpler.</li>
+            <li><strong>Implications:</strong> Using the right array query algorithms makes data operations faster and helps systems run smoothly. Using the wrong methods can slow everything down. These algorithms are important for handling large amounts of data quickly and keeping systems working well. In short, they make searching and managing data faster in real-life situations.</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>6. Differentiate between tree and graphs and their traversals. The applications of each</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>Difference Between Trees and Graphs:</strong> A tree is a hierarchical structure where each node has a single parent and zero or more children. A graph, on the other hand, is a set of vertices connected by edges, and nodes can have multiple relationships with each other. Trees are a specific kind of graph that doesn't have cycles, while graphs can have cycles.</li>
+            <li><strong>Traversals:</strong> Both trees and graphs have various ways to traverse through their elements:</li>
+            <ul>
+                <li><strong>Tree Traversals:</strong>
+                    <ul>
+                        <li><strong>Preorder Traversal:</strong> Visit the root, then the left subtree, followed by the right subtree.</li>
+                        <li><strong>Inorder Traversal:</strong> Visit the left subtree, then the root, followed by the right subtree.</li>
+                        <li><strong>Postorder Traversal:</strong> Visit the left subtree, then the right subtree, and finally the root.</li>
+                        <li><strong>Level Order Traversal:</strong> Visit all nodes at each level from top to bottom.</li>
+                    </ul>
                 </li>
-        </ul>
-        <h3>Applications:</h3>
-        <ul>
-            <li><strong>Tree:</strong> Hierarchical data, file systems,Phone Contact Lists.</li>
-            <li><strong>Graph:</strong> Networks, Social Media Connections,,Navigation Apps,Online Shopping Recommendations:.</li>
-        </ul>
-    </div>
-    <h3></h3>
-        <div class="container">
-        <h2>7. Sorting Algorithms</h2>
-        <ul>
-            <li><strong>Bubble Sort:</strong> Compares each pair of adjacent elements and swaps them if they’re in the wrong order, repeating this until the list is sorted.. (Time Complexity: <code>O(n^2)</code>)</li>
-            <li><strong>Selection Sort:</strong> Finds the smallest element in the list and moves it to the correct position, then repeats the process with the remaining unsorted elements. (Time Complexity: <code>O(n^2)</code>)</li>
-            <li><strong>Insertion Sort:</strong> Takes one element at a time and inserts it into its correct position within the already sorted part of the list.. (Time Complexity: <code>O(n^2)</code>)</li>
-            <li><strong>Quick Sort:</strong>Select a value(pivote) from the data provided then find it's home ,then continue the same process till every element get it's home. (Time Complexity: <code>O(n log n)</code>)</li>
-            <li><strong>Merge Sort:</strong> Divide the data into smaller parts, sorts them, and then merges them back together. (Time Complexity: <code>O(n log n)</code>)</li>
-            <li><strong>Heap Sort:</strong> Builds a heap tree from the list and repeatedly removes the largest element to create a sorted list. (Time Complexity: <code>O(n log n)</code>)</li>
+                <li><strong>Graph Traversals:</strong>
+                    <ul>
+                        <li><strong>BFS (Breadth-First Search):</strong> Traverse level by level, starting from the root node.</li>
+                        <li><strong>DFS (Depth-First Search):</strong> Explore as far as possible along one branch before backtracking.</li>
+                    </ul>
+                </li>
+            </ul>
         </ul>
     </div>
-        <h3></h3>
-        <div class="container">
-        <h2>8. Shortest Path Algorithms</h2>
-        <ul>
-            <li><strong>Dijkstra’s Algorithm:</strong> Finds the shortest path from one starting point to all other points in a graph, as long as all edge weights are positive.</li>
-            <li><strong>Floyd’s Algorithm:</strong>Finds the shortest paths between all pairs of nodes in a graph, using a dynamic programming approach.</li>
-            <li><strong>Bellman-Ford Algorithm:</strong>Finds the shortest paths from a starting point to all other points, even if some edges have negative weights.</li>
-            <li><strong>Warshall’s Algorithm:</strong> Finds the shortest paths between all pairs of nodes in a graph, using a method that involves bitwise operations</li>
-            <li><strong>Kruskal’s Algorithm:</strong> Creates a minimum spanning tree by adding the shortest edges one by one, making sure there are no cycles.</li>
-            <li><strong>Prim’s Algorithm:</strong>Builds a minimum spanning tree starting from any node and adding the shortest edge from the tree to a new node.</li>
-            <li><strong>Depth First Search Algorithm:</strong> used to trraverse a graph by starting at a node and visiting all its connected nodes, going as deep as possible before backtracking</li>
-        </ul>
-    </div>
-    <h3></h3>
-        <div class="container">
-        <h2>9. Algorithm Design Techniques</h2>
-        <ul>
-            <li><strong>Divide and Conquer:</strong> Break a problem into smaller pieces, solve each piece, and then combine the results to get the final solution.</li>
-            <li><strong>Brute Force:</strong> Try every possible solution and choose the best one.</li>
-            <li><strong>Backtracking:</strong>Explore all possible solutions step by step, but if a solution fails, go back and try another path.</li>
-            <li><strong>Recursion:</strong> Solve a problem by solving smaller versions of the same problem, repeating until base case.</li>
-        </ul>
-    </div>
-  </section>
-  <button onclick="window.history.back();" style="background-color: #0bb12f; color: rgb(241, 233, 233); border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">Back</button>
+
+    <footer>
+        <p>&copy; 2024 Data Structures and Algorithms Summary</p>
+    </footer>
+</section>
 </body>
+</html>
