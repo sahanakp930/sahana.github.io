@@ -8,6 +8,7 @@
 #include <cstring>
 #include <memory>
 using namespace std;
+int visited[50];
 /**structure for recording student information(array implementation)**/
 struct school
 {
@@ -351,7 +352,7 @@ void Sort(struct graph &g, int E) {
 int Find(int arr[], int p) {
     if (arr[p] == p)
         return p;
-    return arr[p] = Find(arr, arr[p]); 
+    return arr[p] = Find(arr, arr[p]);
 }
 /**function name :Union
 input:Array of defined elements,vertex V,indices p and q
@@ -552,8 +553,49 @@ int KMP_search(const string& pattern, const string& text) {
 
     return -1;  // No match found
 }
+void DFS(int vertex, int graph[10][10])
+{
+    int i;
+    visited[vertex] = 1;
+    cout << vertex << " ";
+
+    for (i = 0; i < 10; i++)
+    {
+        if (graph[vertex][i] && !visited[i])
+        {
+            DFS(i, graph);
+        }
+    }
+}
+
+/** Function name: print_solution
+ * Input Params: matrix from main
+ * Return type: void
+ * Description: prints all pair shortest paths from each vertex
+ */
+void print_solution(int dist[10][10])
+{
+    int i, j;
+    cout << "\nThe following matrix shows the shortest distances between every pair of vertices (places):\n";
+    cout << "*****************************\n";
+    for (i = 0; i < 10; i++)
+    {
+        for (j = 0; j < 10; j++)
+        {
+            if (i == j)
+                cout << " 0";
+            else
+                cout << dist[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "*****************************\n";
+}
 int main() {
+    /**declarations**/
     int choice;
+    int i;
+    int source;
     //security to the program(KMP implementation)
     string security="Pooja@331";
     string pin;
@@ -569,6 +611,7 @@ int main() {
         cout << "1-students record in school\n";
         cout << "2-24\7 water supply\n";
         cout<< "3-Delivery management\n";
+        cout<<" 4-IF THE USER I.E DELIVERY AGENT WANTS TO JUST WANDERLUST THE PLACES NOT PARTICULARLY IN NEED OF SHORTEST PATH(wants to find immediate cities\n";
         cout << "Any other option to exit\n";
         cout << "Enter choice\n";
         cin >> choice;
@@ -614,7 +657,30 @@ int main() {
             }
             case 3:executeDeliveryFunctionality();
             break;
+            case 4:{/** DFS implementation **/
+            int graph[10][10] = {
+                    {0, 68, 35, 1, 70, 25, 79, 59, 63, 65},
+                    {6, 0, 82, 28, 62, 92, 96, 43, 28, 37},
+                    {92, 5, 0, 54, 93, 83, 22, 17, 19, 96},
+                    {48, 27, 72, 0, 70, 13, 68, 100, 36, 95},
+                    {4, 12, 23, 34, 0, 65, 42, 12, 54, 69},
+                    {48, 45, 63, 58, 38, 0, 24, 42, 30, 79},
+                    {17, 36, 91, 43, 89, 7, 0, 43, 65, 49},
+                    {47, 6, 91, 30, 71, 51, 7, 0, 94, 49},
+                    {30, 24, 85, 55, 57, 41, 67, 77, 0, 9},
+                    {45, 40, 27, 24, 38, 39, 19, 83, 30, 0}
+                    };
 
+                cout << "\nEnter the place (vertex) from which you wish to start: ";
+                cin >> source;
+
+                for (i = 0; i < 10; i++)
+                    {
+                      visited[i] = 0;
+                    }
+            cout << "\nTHE PATH THAT THE USER HAS TO OPT IN ORDER TO REACH THE END DESTINATION " << source << ": ";
+            DFS(source, graph);}
+           break;
             default:
                 cout << "Exiting...\n";
                 return 0; // Exit the program
