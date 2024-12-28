@@ -7,57 +7,152 @@
     <title>Business Cases</title>
     <!-- Assuming the CSS file is in the same directory -->
     <link rel="stylesheet" href="../businesscases.css">
+    <style>
+        /* Style the body to have some space and better readability */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Style for the navbar */
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .nav-list li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .nav-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main heading style */
+        .buss {
+            text-align: center;
+            margin: 40px 0;
+            color: #333;
+        }
+
+        /* Style for each member section */
+        .member-section {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .member-section:hover {
+            background-color: #f9f9f9;
+        }
+
+        .member-section h2 {
+            color: #4CAF50;
+        }
+
+        .member-section p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .member-section a.detail {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .member-section a.detail:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for the back button */
+        button {
+            background-color: #781b91;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        button:hover {
+            background-color: #9c28b7;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar">
         <ul class="nav-list">
-            <li><a style="color:rgb(255, 255, 255)" href="../home/home.html">Home</a></li>
-            <li><a style="color:rgb(255, 255, 255)" href="../../index.html">Project Introduction</a></li>
-            <li><a style="color:rgb(255, 255, 255)" href="./teamlearning.html">Learning Reflections</a></li>
+            <li><a href="../home/home.html">Home</a></li>
+            <li><a href="../../index.html">Project Introduction</a></li>
+            <li><a href="./teamlearning.html">Learning Reflections</a></li>
         </ul>
     </nav>
 
     <h1 class="buss"><strong>Business Cases Identified by Each Team Member:</strong></h1>
 
-    <div>
+    <div class="member-section">
         <h2>Pooja (331)</h2>
         <p>
-            1. Students record in school.<br>
+            1. Students Record in School<br>
             2. 24/7 Water Supply<br>
             3. Delivery Management<br>
         </p><br>
-        <!-- Correct relative path to Pooja.html -->
         <a class="detail" href="../businesscases/Pooja.html">Details</a>
     </div>
 
-    <div>
+    <div class="member-section">
         <h2>Sahana KP (332)</h2>
         <p>
             1. Employee Record<br>
             2. Passenger Management<br>
             3. Waste Management<br>
         </p><br>
-        <!-- Correct relative path to Sahana.html -->
         <a class="detail" href="../businesscases/Sahana.html">Details</a>
     </div>
 
-    <div>
+    <div class="member-section">
         <h2>Vaishali (305)</h2>
         <p>
             1. Library Management<br>
-            2. Time Calculation between any two places<br>
+            2. Time Calculation Between Any Two Places<br>
             3. Public Safety Management<br>
         </p><br>
-        <!-- Correct relative path to Vaishali.html -->
         <a class="detail" href="../businesscases/Vaishali.html">Details</a>
     </div>
 
-    <!-- Back Button -->
-    <button onclick="window.history.back();" 
-        style="background-color: #781b91; color: white; border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">
-        Back
-    </button>
+    <button onclick="window.history.back();">Back</button>
+
 </body>
 
 </html>
