@@ -9,10 +9,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
             background-color: #030303;
-            color: #ffffff;
+            color: #212529;
             margin: 0;
             padding: 20px;
         }
+       
         h1, h2, h3 {
             color: #007bff;
         }
@@ -64,12 +65,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .highlight {
-            color: #ffffff;
-            background-color: #ff5733;
-            padding: 10px;
-            border-radius: 5px;
-        }
         .note {
             font-size: 0.9em;
             background-color: #f8f9fa;
@@ -83,119 +78,221 @@
             font-size: 0.9em;
             color: #6a7077;
         }
-        .navbar {
-            position: sticky;
-            top: 0;
-            background-color: #0c540e;
-            width: 100%;
-            z-index: 1000;
-            padding: 0.5rem 1rem;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            border-radius: 10px;
-            justify-content: space-between;
-        }
-        .nav-list {
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            align-content: center;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-list li {
-            margin: 0;
-        }
-        .nav-list a {
-            text-decoration: none;
-            color: #FB5235;
-            align-content: center;
-            padding: 1rem 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .nav-list a:hover {
-            transform: scale(1.02);
-            background-color: #2fef2c;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-radius: 4px;
-        }
-        .content {
-            padding: 2rem;
-            font-size: 1.2rem;
-            line-height: 1.6;
-        }
-        button {
-            background-color: #0bb12f;
-            color: #f1e9e9;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        button:hover {
-            background-color: #078a1c;
-        }
+    .navbar {
+    position: sticky;
+    top: 0;
+    background-color:  #0c540e;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    justify-content: space-between;
+  }
+
+ 
+  
+  .nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .nav-list li {
+    margin: 0;
+    color: #866545;
+  }
+  
+  .nav-list a {
+    text-decoration: none;
+    color: #FB5235;
+    align-content: center;
+    padding: 1rem 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-list a:hover {
+    transform: scale(1.02);  
+    background-color: #2fef2c;
+   
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);  
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 4px;
+  }
+  
+  .content {
+    padding: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <ul class="nav-list">
-            <li><a style="color:rgb(255, 255, 255)" href="/sahana.github.io/blocks/home/home.html">Home</a></li>
-            <li><a style="color:rgb(255, 255, 255)" href="/sahana.github.io/index.html">PROJECT OVERVIEW</a></li>
-            <li><a style="color:rgb(253, 251, 251)" href="/sahana.github.io/blocks/learningref/teamlearning.html">Learning Reflections</a></li>
+            <li><a style="color:rgb(255, 255, 255)"  href="/sahana.github.io/blocks/home/home.html">Home</a></li>
+            <li><a style="color:rgb(255, 255, 255)"  href="/sahana.github.io/index.html">PROJECT OVERVIEW</a></li>
+            <li><a  style="color:rgb(253, 251, 251)" href="/sahana.github.io/blocks/learningref/teamlearning.html">Learning Reflections</a></li>
         </ul>
     </nav>
-    <section>
-        <h1>Data Structures and Algorithms Summary</h1>
+  <section>
+    
+        <h1>Data Structures and Algorithms </h1>
         <div class="container">
-            <h2>1. What is an algorithm?</h2>
-            <h3>Ans:</h3>
-            <p>An <strong>algorithm</strong> is a step-by-step procedure or formula for solving a problem. It is a sequence of instructions designed to perform a specific task or solve a problem.</p>
+        <h2>1. What are the kinds of problems we see in nature?</h2>
+        <ul>
+            <li><strong>Iteration:</strong> Involves Repetative process,Ex:the cells in our body repeatedly divide,climate always repetedly changes.</li>
+            <li><strong>Recursion:</strong> A function calls itself,Ex:single virus can produce many copies of it.</li>
+            <li><strong>Backtracking:</strong> While playing the game of chess backtracks on failure..</li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>2. What is space and time efficiency? Why are they important? Explain the different classes of problems and orders of growth</h2>
+        <ul>
+            <li><strong>Space Efficiency:</strong> Extra space the algorithm requires is space efficiency.</li>
+            <li><strong>Time Efficiency:</strong> How fast an algorithm runs is time efficiency.</li>
+        </ul>
+    
+    
+        <h2>Why are They Important?</h2>
+        <ul>
+            <li><strong>Resource Management:</strong> Efficient algorithms save memory and time, which is crucial for limited resources in real-world systems.</li>
+            <li><strong>Scalability:</strong> With increasing input sizes, efficient algorithms ensure performance doesn’t degrade.</li>
+            <li><strong>Real-Time Applications:</strong> Faster, efficient solutions are vital in applications like GPS, healthcare, AI, and large-scale data processing.</li>
+            <li><strong>Different Classes of Problems</strong></li>
+            <li><strong>Computational Problems:</strong> Problems requiring algorithms for problem-solving (sorting, searching).</li>
+            <li><strong>Optimization Problems:</strong> Finding the best solution out of many possibilities (shortest path, resource allocation).</li>
+            <li><strong>Decision Problems:</strong> Determining whether a given condition is true or false for a problem.</li>
+            <li><strong>Search Problems:</strong> Locating specific information from a large dataset (like finding a word in a dictionary).</li>
+
+            <li><strong>Classes of problems:</strong><br>1.Constant time:execution time does not depend on input time.
+            <li>2.Logarithmic time:execution time grows logarithmically with input size.
+             <li>3.Linear time:execution time grows linearly with input size.
+             <li>4.Linearithmic time:a combination of linear and logarithmic grows rates.
+              <li>5.Quadratic time:Execution time grows quadratically with input size.
+              <li>6.Exponential time:execution time doubles with each additional input unit.
+               <li>7.Factorial time:execution time grows factorially with input size.
+               <li><strong>Orders of growth:</strong><br>1.Constant time O(1):The runtime remains the same regardless of the input size.
+              <li>2.Logarithmic time O(logn): The runtime grows slowly, increasing logarithmically as the input size grows, often seen in binary search.
+            <li>3.Linear time O(n): The runtime increases proportionally to the input size, common in simple loops.
+            <li>4.Linearithmic time O(nlogn): The runtime grows faster than linear but slower than quadratic.
+            <li>5.Quadratic time O(n2): The runtime grows quadratically, often in nested loops.
+            <li>6.Cubic time O(n3): The runtime increases even more steeply that quadratic.
+            <li>7. Exponential time O(2n): The runtime grows exponentially, with each additional input, typical of brute-force solutions.
+            <li>8. Factorial time O(n!): The runtime grows extremely fast, seen in problems with extensive permutations.</li> 
+
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>3. Take away from different design principles from chapter 2</h2>
+    </div>
+
+    <div class="container">
+        <h2>4. The hierarchical data and how different tree data structures solve and optimize over the problem scenarios (tree, bst, avl, 2-3, red-black, heap, trie)</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>Hierarchical Data & Tree Data Structures</strong></li>
+            <li>Hierarchical can be expressed in different ways,1 way is expressed in form of tree i,e n-array tree.It can be expressed in binary tree.</li>
+            <li><strong>Binary Search Tree:</strong> It is created by taking first element as root ,less than root are towards left and greater than or equal are towards the right of tree.</li>
+            <li><strong>AVL Tree:</strong>AVL tree is balance version of binary tree ,In this we rotate in order to balance it.</li>
             
-            <h2>2. What are data structures?</h2>
-            <h3>Ans:</h3>
-            <p><strong>Data structures</strong> are ways to organize and store data efficiently for access and modification. Examples include arrays, linked lists, stacks, queues, trees, and graphs.</p>
-            
-            <h2>3. Explain time complexity.</h2>
-            <h3>Ans:</h3>
-            <p><strong>Time complexity</strong> represents the amount of time an algorithm takes to complete as a function of the input size, typically expressed using Big-O notation, such as O(1), O(n), O(log n), etc.</p>
-            
-            <h2>4. Explain space complexity.</h2>
-            <h3>Ans:</h3>
-            <p><strong>Space complexity</strong> measures the total amount of memory an algorithm needs, including input data, auxiliary space, and recursion stack.</p>
-            
-            <h2>5. What is recursion?</h2>
-            <h3>Ans:</h3>
-            <p><strong>Recursion</strong> is a programming technique where a function calls itself to solve smaller instances of a problem until a base condition is met.</p>
-            
-            <h2>6. What are the applications of graphs?</h2>
-            <h3>Ans:</h3>
-            <p>Graphs are used in social networks, navigation systems, web page ranking, network routing, and modeling relationships between objects.</p>
-            
-            <h2>7. What is the difference between a stack and a queue?</h2>
-            <h3>Ans:</h3>
-            <p>A <strong>stack</strong> is a Last In, First Out (LIFO) data structure, whereas a <strong>queue</strong> is a First In, First Out (FIFO) data structure.</p>
-            
-            <h2>8. What is a binary tree?</h2>
-            <h3>Ans:</h3>
-            <p>A <strong>binary tree</strong> is a hierarchical data structure where each node has at most two children, called the left and right children.</p>
-            
-            <div class="highlight">
-                <h2>9. Discuss about the different studied algorithm design techniques.</h2>
-                <h3>Ans:</h3>
-                <ul>
-                    <li><strong>Divide and conquer:</strong> Breaks a problem into smaller parts and combines results. Examples: Merge Sort, Binary Search.</li>
-                    <li><strong>Dynamic programming:</strong> Solves overlapping subproblems, stores results. Example: Matrix Chain Multiplication.</li>
-                    <li><strong>Greedy algorithms:</strong> Makes the best immediate choice. Examples: Dijkstra's Algorithm, Kruskal's Algorithm.</li>
-                    <li><strong>Backtracking:</strong> Explores all possibilities and backtracks when needed. Examples: N-Queens, solving puzzles.</li>
-                    <li><strong>Branch and bound:</strong> Optimizes problem-solving with pruning. Example: Traveling Salesman Problem.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <button onclick="window.history.back();">Back</button>
-</body>
-</html>
+            <li><strong>Red-Black Tree:</strong> A Red-Black Tree is another type of self-balancing binary search tree. Root inserted with black and every other node with red with no successive same colour allowed.</li>
+            <li><strong>2-3 Tree:</strong>It has 2node or 3node.If the number of keys present in node equals 3 we promote middle key as parent and split remaining 2 children nodes.</li>
+            <li><strong>Heap:</strong>heap is defined by tree shape requirement and parental dominance.</li>
+            <li><strong>Trie:</strong>It is tree like data structure where number of nodes of tree store alphabets and strings can be retrived by traversing down a branch path of tree.</li>
+           
+           
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>5. The need for array query algorithms and their implications. Their applications and principles need to be discussed</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>The Need for Array Query Algorithms:</strong> The need of array query algorithms is to quickly extract data and perform the operations faster.</li>
+            <li><strong>Why We Need Them:</strong> We need array query algorithms because they make data operations much faster. Searching through an unsorted list can take a lot of time.</li>
+            <li><strong>Principles of Array Query Algorithms:</strong></li>
+            <ul>
+                <li><strong>1.Data Structures:</strong> The choice of data structures play a major role</li>
+                <li><strong>2.Divide and Conquer:</strong> Break the problem into smaller parts to solve it as we did in quick sort.</li>
+                <li><strong>3.Transfer and conquer:</strong>A problem instance is transformed to one of the below before the solution is obtained.</li>
+
+            </ul>
+            <li><strong>Applications:</strong> They help search and sort data quickly in databases,make faster decisions in real time systems like traffic.</li>
+            <li><strong>Implications:</strong> Using the right array query algorithms makes data operations faster and helps systems run smoothly. Using the wrong methods can slow everything down. These algorithms are important for handling large amounts of data quickly and keeping systems working well. In short, they make searching and managing data faster in real-life situations.</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>6. Differentiate between tree and graphs and their traversals. The applications of each</h2>
+        <h3>Ans:</h3>
+        <ul>
+            <li><strong>Difference Between Trees and Graphs:</strong> A tree is a hierarchical structure,they have no cycles whereas graph have non hierarchical structure,they have cycles</li>
+            <li><strong>Traversals:</strong> Both trees and graphs have various ways to traverse through their elements:</li>
+            <ul>
+                <li><strong>Tree Traversals:</strong>
+                    <ul>
+                        <li><strong>Preorder Traversal:</strong> Visit the root, then the left subtree, followed by the right subtree.</li>
+                        <li><strong>Inorder Traversal:</strong> Visit the left subtree, then the root, followed by the right subtree.</li>
+                        <li><strong>Postorder Traversal:</strong> Visit the left subtree, then the right subtree, and finally the root.</li>
+                        <li><strong>Level Order Traversal:</strong> Visit all nodes at each level from top to bottom.</li>
+                    </ul>
+                </li>
+                <li><strong>Graph Traversals:</strong>
+                    <ul>
+                        <li><strong>BFS (Breadth-First Search):</strong> Traverse level by level, starting from the root node.</li>
+                        <li><strong>DFS (Depth-First Search):</strong> Explore as far as possible along one branch before backtracking.</li>
+                    </ul>
+                </li>
+            </ul>
+        </ul>
+    </div>
+       <div class="container">
+        <h2>7.Deliberate on sorting and searching algorithms, the technique behind each and their connection to the real world</h2>
+         <h3>Ans:</h3>
+           <ul>
+               <li><strong>Bubble sort:</strong>In this we compare the swap elements.maximum element finds its home.</li>
+               <li><strong>Selection sort:</strong>In this we compare the swap elements.minimum element finds its home.</li>
+               <li><strong>Insertion sort:</strong>In this we copy the element and then compare and swapping happens.</li>
+               <li><strong>Merge sort:</strong>We divide the elements into smaller parts and then merges them.</li>
+               <li><strong>Quick sort:</strong>We use divide and conquer principle,divide the elements into larger or smaller groups and the sorts them.</li>
+                <li><strong>Linear Search:</strong>We search the target element sequentially.</li>
+                <li><strong>Binary Search:</strong>We sort the array and then divide it into half and search it.</li>
+                   <li><strong>Linear Search:</strong>We search the target element sequentially.</li>
+                   <li><strong>Real world connection:</strong>Sorting and Searching are fundamental operations in database systems,operating systems,web search engines etc.</li>
+           </ul>
+       </div>
+       <div class="container">
+        <h2>8.Discuss the importance of graph algorithms with respect to spanning trees and shortest path.</h2>
+         <h3>Ans:</h3>
+           <ul>
+               <li><strong>Importance of Graph Algorithms:</strong>Graph algorithms are crucial for solving real-world problems that involve networks, connections, or relationships. Two key areas where graph algorithms are highly important are spanning trees and shortest paths.</li>
+               <li><strong>Spanning Trees:</strong>A spanning tree is a subgraph of a graph that includes all its nodes but only enough edges to form a tree (no cycles). The most common type is the Minimum Spanning Tree (MST), which minimizes the total weight of the edges.</li>
+               <li><strong>Why spanning trees are important..?</strong>Spanning trees are vital in network design, helping to create efficient communication or electrical networks at minimal cost, such as laying cables for internet or electricity while avoiding unnecessary expenses. They also aid in optimization by reducing redundant connections while ensuring the network remains fully operational. Additionally, spanning trees are used in clustering for machine learning and data analysis to group related data points effectively.</li>
+               <li><strong>Shortest Paths:</strong>Shortest path algorithms find the smallest possible distance or cost between two nodes in a graph. Examples include Dijkstra's Algorithm and Bellman-Ford Algorithm.</li>
+               <li><strong>Why shortest paths are important..?</strong>Shortest path algorithms are vital for navigation systems to find the fastest routes, network routing for efficient data flow, transportation to optimize deliveries and schedules, and game development for pathfinding in characters or objects.</li>
+               <li><strong>Real-World Impact:</strong>Graph algorithms for spanning trees and shortest paths are essential in areas like transportation, communication, logistics, and even gaming. They provide efficient ways to design networks, reduce costs, and optimize processes, making them critical for modern technology and infrastructure.</li>
+           </ul>
+       </div>
+      <div class="container">
+       <h2>9.Discuss about the different studied algorithm design techniques.</h2>
+        <h3>Ans:</h3>
+      <ul>
+         <li><strong>Divide and conquer:</strong>Divide and conquer breaks a problem into smaller parts, solves each part, and combines the results. Algorithms like Merge Sort, Quick Sort, and Binary Search use this method for efficient sorting and searching, making it ideal for data processing and computational tasks</li>
+          <li><strong>Dynamic programming:</strong>Dynamic programming solves overlapping subproblems and stores results to avoid repetition. It is used in algorithms like Matrix Chain Multiplication and Optimal Binary Search Tree, helping with optimization in resource allocation and scheduling.</li>
+          <li><strong>Greedy algorithms:</strong>Greedy algorithms make the best immediate choices to find an overall solution. They are used in Kruskal’s and Prim’s for minimum spanning trees and Dijkstra’s Algorithm for shortest paths, helping with network design and resource management</li>
+          <li><strong>Backtracking:</strong>Backtracking explores all possible solutions, undoing steps when constraints are violated. It solves problems like N-Queens and is useful for puzzles, combinatorial problems, and constraint-based tasks like solving mazes</li>
+          <li><strong>Branch and bound:</strong>Branch and bound systematically explores and prunes unpromising options to solve optimization problems like Job Scheduling and Travelling Salesman Problem, commonly used in logistics and project planning.</li>
+       </ul>
+    </div>
+  </section>
+  <button onclick="window.history.back();" style="background-color: #0bb12f; color: rgb(241, 233, 233); border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">Back</button>
+</body> 
