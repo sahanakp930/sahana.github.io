@@ -1,2 +1,8 @@
 Function Name:print_solution
 Efficiency analysis:O(n^2)
+
+Function Name:Sort and heapify
+Efficiency analysis:heapify:2(n-log(n+1))
+                    Sort:nlogn
+                    Total:max{n,nlogn}=O(nlogn)
+Function Name:
