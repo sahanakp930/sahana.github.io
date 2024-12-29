@@ -1,12 +1,105 @@
-Function Name:print_solution
-Efficiency analysis:O(n^2)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiency Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        h2 {
+            color: #2196F3;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Efficiency Analysis</h1>
 
-Function Name:Sort and heapify
-Efficiency analysis:heapify:2(n-log(n+1))
-                    Sort:nlogn
-                    Total:max{n,nlogn}=O(nlogn)
+    <h2>Function: <span class="highlight">print_solution</span></h2>
+    <p><strong>Efficiency Analysis:</strong> <span class="highlight">O(n²)</span></p>
 
-Function Name:Quicksort
-Efficiency analysis:Qbest=O(nlogn)
-                    Qworst=O(n^2)
-                    Qavg=O(nlogn)
+    <h2>Function: <span class="highlight">Sort and Heapify</span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Operation</th>
+                <th>Efficiency</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Heapify</td>
+                <td>2(n - log(n+1))</td>
+            </tr>
+            <tr>
+                <td>Sort</td>
+                <td>n log n</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>max{n, n log n} = <span class="highlight">O(n log n)</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Function: <span class="highlight">Quicksort</span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Scenario</th>
+                <th>Efficiency</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Best Case</td>
+                <td><span class="highlight">O(n log n)</span></td>
+            </tr>
+            <tr>
+                <td>Worst Case</td>
+                <td><span class="highlight">O(n²)</span></td>
+            </tr>
+            <tr>
+                <td>Average Case</td>
+                <td><span class="highlight">O(n log n)</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
