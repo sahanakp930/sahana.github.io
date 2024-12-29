@@ -1,1 +1,11 @@
+1.Function Name: heapsort
+efficiency analysis: O(n^2)
 
+2.Function Name: heapify
+efficiency analysis: 2[n-log(n+1)]
+
+3.Function Name: bfs
+efficiency analysis: O(V+E)
+
+4.Function Name: dfs
+efficiency analysis: O(V+E)
