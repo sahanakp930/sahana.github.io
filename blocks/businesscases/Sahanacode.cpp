@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <cstring>
 #include <memory>
+#include <queue>
+#include <stack>
 using namespace std;
 // Structure to hold employee data
 struct Employee {
@@ -35,6 +37,7 @@ struct Waste {
     string wasteType;    // "Wet" or "Dry"
     string degradable;   // "Degradable" or "Non-Degradable" (for Dry only)
     string chemical;     // "Chemical" or "Non-Chemical" (for Degradable Dry only)
+    Waste* next;         // Pointer to the next Waste node
 };
 
 // Function prototypes
@@ -44,6 +47,21 @@ int deleteEmployee(Node* &root, int exp);
 Employee max(Node* root);
 Employee min(Node* root);
 void load_from_file7(Node* &root);
+void executeEmployeeFunctionality();
+void searchPassenger(const char searchName[]);
+void heapify(P passengers[], int n, int i);
+void heapSort(P passengers[], int n);
+void load_from_file_1();
+void executePassengerFunctionality();
+string detectType(double moisture);
+string detectDegradability(string material);
+void addWaste(Waste*& head, int id, string type, string degradable, string chemical) ;
+void displayWaste(Waste* head);
+void placeInBins(Waste* waste);
+void bfs(Waste* head);
+void dfs(Waste* head) ;
+void compute_LPS_array(const string& pattern, int M, vector<int>& lps);
+int KMP_search(const string& pattern, const string& text);
 
 // Global variable for counting entries
 int count_4 = 0;
@@ -387,12 +405,10 @@ void executePassengerFunctionality() {
     cin >> searchName;
     searchPassenger(searchName);
 }
-// To identify the moisture content in waste
 string detectType(double moisture) {
     return (moisture > 50.0) ? "Wet" : "Dry";
 }
 
-// To identify the type of material in waste
 string detectDegradability(string material) {
     if (material == "Paper" || material == "Food" || material == "Wood")
         return "Degradable";
@@ -405,57 +421,84 @@ string detectChemicalPresence(string material) {
     return "Non-Chemical";
 }
 
-// Heapify function for Heap Sort (sorting by ID for clarity)
-void heapify(vector<Waste> &waste, int n, int i) {
-    int largest = i;          // Initialize largest as root
-    int left = 2 * i + 1;     // Left child
-    int right = 2 * i + 2;    // Right child
+// Function to add a Waste node to the end of the list
+void addWaste(Waste*& head, int id, string type, string degradable, string chemical) {
+    Waste* newWaste = new Waste{id, type, degradable, chemical, nullptr};
+    if (!head) {
+        head = newWaste;
+        return;
+    }
+    Waste* temp = head;
+    while (temp->next) {
+        temp = temp->next;
+    }
+    temp->next = newWaste;
+}
 
-    // Compare with left child
-    if (left < n && waste[left].id < waste[largest].id)
-        largest = left;
-
-    // Compare with right child
-    if (right < n && waste[right].id < waste[largest].id)
-        largest = right;
-
-    // Swap and continue heapifying if root is not largest
-    if (largest != i) {
-        swap(waste[i], waste[largest]);
-        heapify(waste, n, largest);
+// Function to display waste data
+void displayWaste(Waste* head) {
+    Waste* temp = head;
+    while (temp) {
+        cout << "ID: " << temp->id
+             << ", Type: " << temp->wasteType
+             << ", Degradable: " << (temp->degradable.empty() ? "N/A" : temp->degradable)
+             << ", Chemical: " << (temp->chemical.empty() ? "N/A" : temp->chemical)
+             << endl;
+        temp = temp->next;
     }
 }
 
-// Heap Sort function
-void heapSort(vector<Waste> &waste) {
-    int n = waste.size();
-
-    // Build heap
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(waste, n, i);
-
-    // Extract elements from heap one by one
-    for (int i = n - 1; i >= 0; i--) {
-        swap(waste[0], waste[i]);
-        heapify(waste, i, 0);
-    }
-}
-
-// Function to simulate actuators sorting waste into bins
-void placeInBins(const vector<Waste> &waste) {
-    cout << "\nPlacing waste into bins:\n";
-    for (const auto &wasteItem : waste) { // Renamed w to wasteItem for clarity
-        cout << "Waste ID: " << wasteItem.id << " -> ";
-        if (wasteItem.wasteType == "Wet") {
+// Function to simulate placing waste into bins
+void placeInBins(Waste* waste) {
+    while (waste) {
+        cout << "Waste ID: " << waste->id << " -> ";
+        if (waste->wasteType == "Wet") {
             cout << "Bin: Wet Waste\n";
-        } else if (wasteItem.wasteType == "Dry" && wasteItem.degradable == "Degradable") {
-            if (wasteItem.chemical == "Chemical") {
+        } else if (waste->wasteType == "Dry" && waste->degradable == "Degradable") {
+            if (waste->chemical == "Chemical") {
                 cout << "Bin: Dry Degradable Chemical Waste\n";
             } else {
                 cout << "Bin: Dry Degradable Non-Chemical Waste\n";
             }
         } else {
             cout << "Bin: Dry Non-Degradable Waste\n";
+        }
+        waste = waste->next;
+    }
+}
+
+// Breadth-First Search (BFS)
+void bfs(Waste* head) {
+    if (!head) return;
+
+    queue<Waste*> q;
+    q.push(head);
+
+    cout << "\nBFS Traversal:\n";
+    while (!q.empty()) {
+        Waste* current = q.front();
+        q.pop();
+        cout << "Processing Waste ID: " << current->id << endl;
+        if (current->next) {
+            q.push(current->next);
+        }
+    }
+}
+
+// Depth-First Search (DFS)
+void dfs(Waste* head) {
+    if (!head) return;
+
+    stack<Waste*> s;
+    s.push(head);
+
+    cout << "\nDFS Traversal:\n";
+    while (!s.empty()) {
+        Waste* current = s.top();
+        s.pop();
+        cout << "Processing Waste ID: " << current->id << endl;
+        if (current->next) {
+            s.push(current->next);
         }
     }
 }
@@ -548,39 +591,28 @@ int main() {
                 break;
             }
                case 3: {
-                // Initialize waste data
-                vector<Waste> wasteData = {
-                    {1, detectType(30.0), detectDegradability("Plastic"), ""},  // Non-Degradable
-                    {2, detectType(70.0), "", ""},                             // Wet Waste
-                    {3, detectType(20.0), detectDegradability("Paper"), detectChemicalPresence("Paper")},  // Degradable, Non-Chemical
-                    {4, detectType(60.0), "", ""},                             // Wet Waste
-                    {5, detectType(10.0), detectDegradability("Battery"), detectChemicalPresence("Battery")} // Non-Degradable, Chemical
-                };
+                Waste* wasteList = nullptr;
 
-                cout << "Raw Waste Data:\n";
-                for (const auto &w : wasteData) {
-                    cout << "ID: " << w.id
-                         << ", Type: " << w.wasteType
-                         << ", Degradable: " << (w.degradable.empty() ? "N/A" : w.degradable)
-                         << ", Chemical: " << (w.chemical.empty() ? "N/A" : w.chemical)
-                         << endl;
-                }
+    // Simulated waste data
+    addWaste(wasteList, 1, detectType(30.0), detectDegradability("Plastic"), "");
+    addWaste(wasteList, 2, detectType(70.0), "", "");
+    addWaste(wasteList, 3, detectType(20.0), detectDegradability("Paper"), detectChemicalPresence("Paper"));
+    addWaste(wasteList, 4, detectType(60.0), "", "");
+    addWaste(wasteList, 5, detectType(10.0), detectDegradability("Battery"), detectChemicalPresence("Battery"));
 
-                // Sort waste using Heap Sort based on waste ID (for clarity)
-                heapSort(wasteData);
+    cout << "Raw Waste Data:\n";
+    displayWaste(wasteList);
 
-                // Display sorted waste and place into bins
-                cout << "\nSorted Waste Data:\n";
-                for (const auto &w : wasteData) {
-                    cout << "ID: " << w.id
-                         << ", Type: " << w.wasteType
-                         << ", Degradable: " << (w.degradable.empty() ? "N/A" : w.degradable)
-                         << ", Chemical: " << (w.chemical.empty() ? "N/A" : w.chemical)
-                         << endl;
-                }
+    // BFS traversal
+    bfs(wasteList);
 
-                placeInBins(wasteData);
-                break;
+    // DFS traversal
+    dfs(wasteList);
+
+    // Place waste into bins
+    cout << "\nPlacing Waste into Bins:\n";
+    placeInBins(wasteList);
+        break;
             }
 
 
