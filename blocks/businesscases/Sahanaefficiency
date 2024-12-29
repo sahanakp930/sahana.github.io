@@ -1,11 +1,84 @@
-1.Function Name: heapsort
-efficiency analysis: O(n^2)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiency Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        h2 {
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Efficiency Analysis</h1>
 
-2.Function Name: heapify
-efficiency analysis: 2[n-log(n+1)]
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Efficiency Analysis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Heapsort</strong></td>
+                <td><span class="highlight">O(n²)</span></td>
+            </tr>
+            <tr>
+                <td><strong>Heapify</strong></td>
+                <td>2[n - log(n+1)]</td>
+            </tr>
+            <tr>
+                <td><strong>BFS</strong> (Breadth-First Search)</td>
+                <td><span class="highlight">O(V + E)</span></td>
+            </tr>
+            <tr>
+                <td><strong>DFS</strong> (Depth-First Search)</td>
+                <td><span class="highlight">O(V + E)</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
 
-3.Function Name: bfs
-efficiency analysis: O(V+E)
-
-4.Function Name: dfs
-efficiency analysis: O(V+E)
