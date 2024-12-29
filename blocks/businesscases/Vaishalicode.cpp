@@ -11,18 +11,15 @@
 #include <tuple>
 
 using namespace std;
-#define MAX 100
 #define MAX_CRIME_TYPES 100
 
+// Structs for Library and Crime Data
 struct Book
 {
     string name;
     string authorname;
     int edition;
 };
-
-Book list[200];
-int global_count4 = 0;
 
 struct Criminal
 {
@@ -37,26 +34,37 @@ struct CrimeType
     unique_ptr<Criminal> criminals;
 };
 
+// Global Variables
+vector<Book> list;
+vector<CrimeType> crimeArray(MAX_CRIME_TYPES);
+
+// Function Declarations
 void executeLibraryFunctionality();
 void load_from_file4();
 void search_books(const string& search_term);
 int bfss(const string& P, const string& T);
-vector<CrimeType> crimeArray(MAX_CRIME_TYPES);
 void executeCrimeFunctionality();
 void addCriminal(const string& crimeType, const string& name);
 void displayCriminals(const string& crimeType);
 void freeCrimeArrays();
 void executeTimeCalculation();
 
+// Sorting Algorithms
+void mergeSort(vector<Book>& books, int left, int right);
+void heapSort(vector<Book>& books);
+void quickSort(vector<Book>& books, int low, int high);
+int partition(vector<Book>& books, int low, int high);
+void heapify(vector<Book>& books, int n, int i);
+
 // BFS Algorithm
 void bfs(const vector<vector<int>>& adjList, int startNode);
 
 // Kruskal's Algorithm
 struct Edge
- {
+{
     int u, v, weight;
     bool operator<(const Edge& other) const
-     {
+    {
         return weight < other.weight;
     }
 };
@@ -66,6 +74,9 @@ void kruskal(int numVertices, vector<Edge>& edges);
 
 // Dijkstra's Algorithm
 void dijkstra(const vector<vector<pair<int, int>>>& adjList, int startNode);
+
+// KMP Search Algorithm
+int KMP_search(const string& text, const string& pattern);
 
 void executeLibraryFunctionality()
 {
@@ -86,20 +97,21 @@ void load_from_file4()
         return;
     }
 
-    while (file >> list[global_count4].name >> list[global_count4].authorname >> list[global_count4].edition)
+    Book book;
+    while (file >> book.name >> book.authorname >> book.edition)
     {
-        cout << list[global_count4].name << " " << list[global_count4].authorname << " " << list[global_count4].edition << endl;
-        global_count4++;
+        list.push_back(book);
+        cout << book.name << " " << book.authorname << " " << book.edition << endl;
     }
-    cout << "Count = " << global_count4 << endl;
 
+    cout << "Count = " << list.size() << endl;
     file.close();
 }
 
 void search_books(const string& search_term)
 {
     int found = 0;
-    for (int i = 0; i < global_count4; i++)
+    for (int i = 0; i < list.size(); i++)
     {
         if (bfss(search_term, list[i].name) != -1)
         {
@@ -149,7 +161,6 @@ void executeCrimeFunctionality()
     string crimeType, name;
     while (file >> crimeType >> name)
     {
-        cout << crimeType << " " << name << endl;
         addCriminal(crimeType, name);
     }
 
@@ -221,7 +232,7 @@ void displayCriminals(const string& crimeType)
 
 void freeCrimeArrays()
 {
-    // Using smart pointers, memory will be automatically freed
+    // Smart pointers automatically handle cleanup
 }
 
 void executeTimeCalculation()
@@ -245,13 +256,13 @@ void executeTimeCalculation()
 }
 
 // Merge Sort
-void merge(vector<Book>& books, int left, int right)
+void mergeSort(vector<Book>& books, int left, int right)
 {
     if (left < right)
     {
         int mid = left + (right - left) / 2;
-        merge(books, left, mid);
-        merge(books, mid + 1, right);
+        mergeSort(books, left, mid);
+        mergeSort(books, mid + 1, right);
 
         int n1 = mid - left + 1;
         int n2 = right - mid;
@@ -314,7 +325,7 @@ void heapSort(vector<Book>& books)
 int partition(vector<Book>& books, int low, int high)
 {
     string pivot = books[high].name;
-    int i = low - 1;
+    int i = (low - 1);
 
     for (int j = low; j < high; j++)
     {
@@ -338,204 +349,114 @@ void quickSort(vector<Book>& books, int low, int high)
     }
 }
 
-void bfs(const vector<vector<int>>& adjList, int startNode)
+// KMP Algorithm
+int KMP_search(const string& text, const string& pattern)
 {
-    vector<bool> visited(adjList.size(), false);
-    queue<int> q;
+    int n = text.length();
+    int m = pattern.length();
 
-    visited[startNode] = true;
-    q.push(startNode);
+    vector<int> lps(m, 0);
+    int len = 0;
+    int i = 1;
 
-    while (!q.empty())
+    while (i < m)
     {
-        int current = q.front();
-        q.pop();
-        cout << "Visited node: " << current << endl;
-
-        for (int neighbor : adjList[current])
+        if (pattern[i] == pattern[len])
         {
-            if (!visited[neighbor])
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else
+        {
+            if (len != 0)
             {
-                visited[neighbor] = true;
-                q.push(neighbor);
+                len = lps[len - 1];
             }
-        }
-    }
-}
-
-int findParent(int u, vector<int>& parent)
-{
-    if (parent[u] != u)
-        parent[u] = findParent(parent[u], parent);
-    return parent[u];
-}
-
-void kruskal(int numVertices, vector<Edge>& edges)
-{
-    sort(edges.begin(), edges.end());
-
-    vector<int> parent(numVertices);
-    for (int i = 0; i < numVertices; i++)
-        parent[i] = i;
-
-    vector<Edge> mst;
-    for (const Edge& edge : edges)
-    {
-        int parentU = findParent(edge.u, parent);
-        int parentV = findParent(edge.v, parent);
-
-        if (parentU != parentV)
-        {
-            mst.push_back(edge);
-            parent[parentU] = parentV;
-        }
-    }
-
-    cout << "Minimum Spanning Tree edges:" << endl;
-    for (const Edge& edge : mst)
-    {
-        cout << edge.u << " - " << edge.v << " : " << edge.weight << endl;
-    }
-}
-
-void dijkstra(const vector<vector<pair<int, int>>>& adjList, int startNode)
-{
-    int n = adjList.size();
-    vector<int> dist(n, INT_MAX);
-    dist[startNode] = 0;
-
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.push({0, startNode});
-
-    while (!pq.empty())
-    {
-        int u = pq.top().second;
-        pq.pop();
-
-        for (const auto& neighbor : adjList[u])
-        {
-            int v = neighbor.first;
-            int weight = neighbor.second;
-
-            if (dist[u] + weight < dist[v])
+            else
             {
-                dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});
+                lps[i] = 0;
+                i++;
             }
         }
     }
 
-    cout << "Shortest distances from node " << startNode << ":" << endl;
-    for (int i = 0; i < n; i++)
+    int j = 0;
+    i = 0;
+    while (i < n)
     {
-        cout << i << " : " << dist[i] << endl;
+        if (pattern[j] == text[i])
+        {
+            i++;
+            j++;
+        }
+
+        if (j == m)
+        {
+            return i - j;
+        }
+        else if (i < n && pattern[j] != text[i])
+        {
+            if (j != 0)
+            {
+                j = lps[j - 1];
+            }
+            else
+            {
+                i++;
+            }
+        }
     }
+
+    return -1;
 }
 
 int main()
 {
-    string security = "Vaishali@305";
+    int choice;
+     string security="Vaishali@305";
     string pin;
-    cout << "Enter the security key to use the program\n";
-    cout << "Name@roll_no\n";
-    cin >> pin;
-    int found = KMP_search(pin, security);
-    if (found != -1)
+    cout<<"Enter the security key to use the program\n";
+    cout<<"Name@roll_no\n";
+    cin>>pin;
+    int found=KMP_search(pin,security);
+    if(found!=-1)
     {
-        cout << "Security key matched. Access granted!\n";
+        cout<<"Security key matched.Access granted!\n";
+    do
+    {
+        cout << "\nMain Menu:\n";
+        cout << "1. Library Functionality\n";
+        cout << "2. Crime Functionality\n";
+        cout << "3. Time Calculation\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-        int choice;
-        while (1)
+        switch (choice)
         {
-            cout << "Menu\n";
-            cout << "1 - Library management\n";
-            cout << "2 - Public safety management\n";
-            cout << "3 - Time calculation between two places\n";
-            cout << "4 - Sort books\n";
-            cout << "5 - Graph Algorithms\n";
-            cout << "Any other option to exit\n";
-            cout << "Enter choice\n";
-            cin >> choice;
-            switch (choice)
-            {
-                case 1:
-                    executeLibraryFunctionality();
-                    break;
-                case 2:
-                    executeCrimeFunctionality();
-                    break;
-                case 3:
-                    executeTimeCalculation();
-                    break;
-                case 4:
-                    cout << "Choose sorting algorithm:\n";
-                    cout << "1 - Merge Sort\n";
-                    cout << "2 - Heap Sort\n";
-                    cout << "3 - Quick Sort\n";
-                    int sortChoice;
-                    cin >> sortChoice;
-                    switch (sortChoice)
-                    {
-                        case 1:
-                            merge(list, 0, global_count4 - 1);
-                            break;
-                        case 2:
-                            heapSort(list);
-                            break;
-                        case 3:
-                            quickSort(list, 0, global_count4 - 1);
-                            break;
-                        default:
-                            cout << "Invalid choice.\n";
-                            break;
-                    }
-                    cout << "Books sorted!\n";
-                    break;
-                case 5:
-                    cout << "Choose graph algorithm:\n";
-                    cout << "1 - BFS\n";
-                    cout << "2 - Kruskal\n";
-                    cout << "3 - Dijkstra\n";
-                    int graphChoice;
-                    cin >> graphChoice;
-                    switch (graphChoice)
-                    {
-                        case 1:
-                            {
-                                vector<vector<int>> adjList = {{1, 2}, {0, 3}, {0, 3}, {1, 2}};
-                                bfs(adjList, 0);
-                            }
-                            break;
-                        case 2:
-                            {
-                                vector<Edge> edges = {{0, 1, 10}, {0, 2, 6}, {1, 2, 5}, {2, 3, 4}};
-                                kruskal(4, edges);
-                            }
-                            break;
-                        case 3:
-                            {
-                                vector<vector<pair<int, int>>> adjList = {
-                                    {{1, 10}, {2, 5}},
-                                    {{0, 10}, {2, 2}, {3, 1}},
-                                    {{0, 5}, {1, 2}, {3, 9}},
-                                    {{1, 1}, {2, 9}}
-                                };
-                                dijkstra(adjList, 0);
-                            }
-                            break;
-                        default:
-                            cout << "Invalid choice.\n";
-                            break;
-                    }
-                    break;
-                default:
-                    cout << "Exiting...\n";
-                    return 0; // Exit the program
-            }
+        case 1:
+            executeLibraryFunctionality();
+            break;
+        case 2:
+            executeCrimeFunctionality();
+            break;
+        case 3:
+            executeTimeCalculation();
+            break;
+        case 4:
+            cout << "Exiting program..." << endl;
+            break;
+        default:
+            cout << "Invalid choice! Please try again.\n";
+            break;
         }
-    }
-    else
-    {
-        cout << "Security key not matched. You cannot continue with the program\n";
-    }
+    } while (choice != 4);
+
+    return 0;
+}
+else
+{
+    cout<<"Security key not matched.You cannot continue with the program\n";
+}
 }
