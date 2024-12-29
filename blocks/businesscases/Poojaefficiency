@@ -5,4 +5,8 @@ Function Name:Sort and heapify
 Efficiency analysis:heapify:2(n-log(n+1))
                     Sort:nlogn
                     Total:max{n,nlogn}=O(nlogn)
-Function Name:
+
+Function Name:Quicksort
+Efficiency analysis:Qbest=O(nlogn)
+                    Qworst=O(n^2)
+                    Qavg=O(nlogn)
