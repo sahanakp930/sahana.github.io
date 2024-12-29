@@ -7,11 +7,14 @@
 #include <cstdlib>
 #include <cstring>
 #include <memory>
+#include <queue>
+#include <tuple>
+
 using namespace std;
 #define MAX 100
 #define MAX_CRIME_TYPES 100
 
-struct Book 
+struct Book
 {
     string name;
     string authorname;
@@ -22,22 +25,22 @@ Book list[200];
 int global_count4 = 0;
 
 struct Criminal
- {
+{
     string name;
     int crimeCount;
     unique_ptr<Criminal> next;
 };
 
 struct CrimeType
- {
+{
     string type;
     unique_ptr<Criminal> criminals;
 };
+
 void executeLibraryFunctionality();
 void load_from_file4();
 void search_books(const string& search_term);
 int bfss(const string& P, const string& T);
-
 vector<CrimeType> crimeArray(MAX_CRIME_TYPES);
 void executeCrimeFunctionality();
 void addCriminal(const string& crimeType, const string& name);
@@ -45,8 +48,27 @@ void displayCriminals(const string& crimeType);
 void freeCrimeArrays();
 void executeTimeCalculation();
 
-void executeLibraryFunctionality()
+// BFS Algorithm
+void bfs(const vector<vector<int>>& adjList, int startNode);
+
+// Kruskal's Algorithm
+struct Edge
  {
+    int u, v, weight;
+    bool operator<(const Edge& other) const
+     {
+        return weight < other.weight;
+    }
+};
+
+int findParent(int u, vector<int>& parent);
+void kruskal(int numVertices, vector<Edge>& edges);
+
+// Dijkstra's Algorithm
+void dijkstra(const vector<vector<pair<int, int>>>& adjList, int startNode);
+
+void executeLibraryFunctionality()
+{
     load_from_file4();
     string search_term;
     cout << "Enter the search pattern: ";
@@ -55,17 +77,15 @@ void executeLibraryFunctionality()
 }
 
 void load_from_file4()
- {
+{
     ifstream file("book.txt");
 
-    // Check if the file was successfully opened
     if (!file)
     {
         cout << "File not found" << endl;
         return;
     }
 
-    // Until the end of the file, read all the file data
     while (file >> list[global_count4].name >> list[global_count4].authorname >> list[global_count4].edition)
     {
         cout << list[global_count4].name << " " << list[global_count4].authorname << " " << list[global_count4].edition << endl;
@@ -76,17 +96,11 @@ void load_from_file4()
     file.close();
 }
 
-/**
- * Function name: search_books
- * Input: Specific subtitle of the book
- * Output: Displays all book details which contain that subtitle
- * Return type: void
- */
-void search_books(const string& search_term) 
+void search_books(const string& search_term)
 {
     int found = 0;
-    for (int i = 0; i < global_count4; i++) 
-        {
+    for (int i = 0; i < global_count4; i++)
+    {
         if (bfss(search_term, list[i].name) != -1)
         {
             cout << "Book found at index " << i << ":\n";
@@ -95,28 +109,22 @@ void search_books(const string& search_term)
         }
     }
 
-    if (!found) 
+    if (!found)
     {
         cout << "No books found with the specified pattern.\n";
     }
 }
 
-/**
- * Function name: bfss (brute force string matching algorithm)
- * Input: Book title name and pattern to be searched in book title
- * Output: Return index of the book on matching the text with pattern else -1
- * Return type: void
- */
 int bfss(const string& P, const string& T)
- {
+{
     int m = P.length();
     int n = T.length();
 
-    for (int i = 0; i <= n - m; i++) 
-        {
+    for (int i = 0; i <= n - m; i++)
+    {
         int j = 0;
         while (j < m && P[j] == T[i + j])
-         {
+        {
             j++;
             if (j == m)
             {
@@ -124,76 +132,64 @@ int bfss(const string& P, const string& T)
             }
         }
     }
-    
+
     return -1; // No match found
 }
+
 void executeCrimeFunctionality()
- {
+{
     ifstream file("crime.txt");
 
-    if (!file) 
+    if (!file)
     {
         cerr << "Error opening file" << endl;
         return;
     }
 
-    // Read the file and add criminals
-    cout << "File contents:" << endl;
     string crimeType, name;
-    while (file >> crimeType >> name) 
+    while (file >> crimeType >> name)
     {
         cout << crimeType << " " << name << endl;
         addCriminal(crimeType, name);
     }
 
-    // Display all crimes and their associated criminals
     cout << "\nAll Crimes Information:" << endl;
-    for (int i = 0; i < MAX_CRIME_TYPES; i++) 
-        {
-        if (!crimeArray[i].type.empty()) 
+    for (int i = 0; i < MAX_CRIME_TYPES; i++)
+    {
+        if (!crimeArray[i].type.empty())
         {
             displayCriminals(crimeArray[i].type);
         }
     }
 
-    // Free the memory before exiting
     freeCrimeArrays();
 }
 
-/**
- * Function name: addCriminal
- * Input: crimeType (string) and name (string)
- * Output: Adds the criminal name to the specific crime type
- * Return type: void
- */
-void addCriminal(const string& crimeType, const string& name) 
+void addCriminal(const string& crimeType, const string& name)
 {
     int crimeIndex = -1;
 
-    // Find the index of the crime type in the array
     for (int i = 0; i < MAX_CRIME_TYPES; i++)
-        {
-        if (crimeArray[i].type == crimeType) 
+    {
+        if (crimeArray[i].type == crimeType)
         {
             crimeIndex = i;
             break;
         }
         if (crimeArray[i].type.empty())
-         {
-            // Empty slot found, store the new crime type
+        {
             crimeArray[i].type = crimeType;
             crimeIndex = i;
             break;
         }
     }
 
-    if (crimeIndex == -1) 
+    if (crimeIndex == -1)
     {
         cout << "Exceeded the maximum number of crime types." << endl;
         return;
     }
 
-    // Create a new criminal node
     auto newCriminal = make_unique<Criminal>();
     newCriminal->name = name;
     newCriminal->crimeCount = 1;
@@ -201,22 +197,16 @@ void addCriminal(const string& crimeType, const string& name)
     crimeArray[crimeIndex].criminals = move(newCriminal);
 }
 
-/**
- * Function name: displayCriminals
- * Input: crimeType (string)
- * Output: Displays the criminals' names for the specific crime
- * Return type: void
- */
 void displayCriminals(const string& crimeType)
- {
-    for (int i = 0; i < MAX_CRIME_TYPES; i++) 
-        {
-        if (crimeArray[i].type == crimeType) 
+{
+    for (int i = 0; i < MAX_CRIME_TYPES; i++)
+    {
+        if (crimeArray[i].type == crimeType)
         {
             cout << "Criminals for " << crimeType << ":" << endl;
 
             Criminal* currentCriminal = crimeArray[i].criminals.get();
-            while (currentCriminal != nullptr) 
+            while (currentCriminal != nullptr)
             {
                 cout << "- " << currentCriminal->name << ": " << currentCriminal->crimeCount << " crimes" << endl;
                 currentCriminal = currentCriminal->next.get();
@@ -229,23 +219,11 @@ void displayCriminals(const string& crimeType)
     cout << "Crime type not found: " << crimeType << endl;
 }
 
-/**
- * Function name: freeCrimeArrays
- * Input: None
- * Output: Frees the memory allocated for the linked lists
- * Return type: void
- */
-void freeCrimeArrays() 
+void freeCrimeArrays()
 {
     // Using smart pointers, memory will be automatically freed
 }
 
-/**
- * Function name: executeTimeCalculation
- * Input: None
- * Output: Computes and displays time difference between two places
- * Return type: void
- */
 void executeTimeCalculation()
 {
     string place1, place2;
@@ -266,112 +244,219 @@ void executeTimeCalculation()
     cout << (timeDifference >= 0 ? "+" : "") << timeDifference << " hours.\n";
 }
 
-/**Function name:KMP search
-Input parameters:pattern and text(security pin:text) (input string:patterns)
-Return type:int
-Description:Return the sum of indices(if the text and pattern match)
-**/
-void compute_LPS_array(const string& pattern, int M, vector<int>& lps)
- {
-    int len = 0;  // length of the previous longest prefix suffix
-    lps[0] = 0;  // lps[0] is always 0
-    int i = 1;
+// Merge Sort
+void merge(vector<Book>& books, int left, int right)
+{
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+        merge(books, left, mid);
+        merge(books, mid + 1, right);
 
-    // Calculate the LPS array
-    while (i < M)
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        vector<Book> leftBooks(n1), rightBooks(n2);
+        for (int i = 0; i < n1; i++)
+            leftBooks[i] = books[left + i];
+        for (int i = 0; i < n2; i++)
+            rightBooks[i] = books[mid + 1 + i];
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2)
         {
-        if (pattern[i] == pattern[len]) 
-        {
-            len++;
-            lps[i] = len;
-            i++;
+            if (leftBooks[i].name < rightBooks[j].name)
+                books[k++] = leftBooks[i++];
+            else
+                books[k++] = rightBooks[j++];
         }
-         
-         else
-            
-         {
-            if (len != 0)
-             {
-                len = lps[len - 1];
-            }
-    else 
+
+        while (i < n1)
+            books[k++] = leftBooks[i++];
+        while (j < n2)
+            books[k++] = rightBooks[j++];
+    }
+}
+
+// Heap Sort
+void heapify(vector<Book>& books, int n, int i)
+{
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && books[left].name > books[largest].name)
+        largest = left;
+    if (right < n && books[right].name > books[largest].name)
+        largest = right;
+
+    if (largest != i)
+    {
+        swap(books[i], books[largest]);
+        heapify(books, n, largest);
+    }
+}
+
+void heapSort(vector<Book>& books)
+{
+    int n = books.size();
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(books, n, i);
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        swap(books[0], books[i]);
+        heapify(books, i, 0);
+    }
+}
+
+// Quick Sort
+int partition(vector<Book>& books, int low, int high)
+{
+    string pivot = books[high].name;
+    int i = low - 1;
+
+    for (int j = low; j < high; j++)
+    {
+        if (books[j].name < pivot)
+        {
+            i++;
+            swap(books[i], books[j]);
+        }
+    }
+    swap(books[i + 1], books[high]);
+    return i + 1;
+}
+
+void quickSort(vector<Book>& books, int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition(books, low, high);
+        quickSort(books, low, pi - 1);
+        quickSort(books, pi + 1, high);
+    }
+}
+
+void bfs(const vector<vector<int>>& adjList, int startNode)
+{
+    vector<bool> visited(adjList.size(), false);
+    queue<int> q;
+
+    visited[startNode] = true;
+    q.push(startNode);
+
+    while (!q.empty())
+    {
+        int current = q.front();
+        q.pop();
+        cout << "Visited node: " << current << endl;
+
+        for (int neighbor : adjList[current])
+        {
+            if (!visited[neighbor])
             {
-                lps[i] = 0;
-                i++;
+                visited[neighbor] = true;
+                q.push(neighbor);
             }
         }
     }
 }
 
-// Function to perform KMP string search
-int KMP_search(const string& pattern, const string& text)
- {
-    int M = pattern.length();
-    int N = text.length();
+int findParent(int u, vector<int>& parent)
+{
+    if (parent[u] != u)
+        parent[u] = findParent(parent[u], parent);
+    return parent[u];
+}
 
-    if (M == 0 || N == 0) 
+void kruskal(int numVertices, vector<Edge>& edges)
+{
+    sort(edges.begin(), edges.end());
+
+    vector<int> parent(numVertices);
+    for (int i = 0; i < numVertices; i++)
+        parent[i] = i;
+
+    vector<Edge> mst;
+    for (const Edge& edge : edges)
     {
-        return -1;
+        int parentU = findParent(edge.u, parent);
+        int parentV = findParent(edge.v, parent);
+
+        if (parentU != parentV)
+        {
+            mst.push_back(edge);
+            parent[parentU] = parentV;
+        }
     }
 
-    vector<int> lps(M);  // LPS array for pattern
-    int j = 0;  // index for pattern
+    cout << "Minimum Spanning Tree edges:" << endl;
+    for (const Edge& edge : mst)
+    {
+        cout << edge.u << " - " << edge.v << " : " << edge.weight << endl;
+    }
+}
 
-    // Preprocess the pattern (compute the LPS array)
-    compute_LPS_array(pattern, M, lps);
+void dijkstra(const vector<vector<pair<int, int>>>& adjList, int startNode)
+{
+    int n = adjList.size();
+    vector<int> dist(n, INT_MAX);
+    dist[startNode] = 0;
 
-    int i = 0;  // index for text
-    while (i < N)
-        {
-        if (pattern[j] == text[i]) 
-        {
-            j++;
-            i++;
-        }
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, startNode});
 
-        if (j == M)
+    while (!pq.empty())
+    {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (const auto& neighbor : adjList[u])
         {
-            return i - j;  // Match found, return starting index
-        } 
-        else if(i < N && pattern[j] != text[i]) 
-        {
-            if (j != 0) 
+            int v = neighbor.first;
+            int weight = neighbor.second;
+
+            if (dist[u] + weight < dist[v])
             {
-                j = lps[j - 1];  // Use LPS to skip characters in the pattern
-            } 
-        else 
-            {
-                i++;
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
             }
         }
     }
 
-    return -1;  // No match found
+    cout << "Shortest distances from node " << startNode << ":" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << i << " : " << dist[i] << endl;
+    }
 }
 
 int main()
- {
+{
     string security = "Vaishali@305";
     string pin;
     cout << "Enter the security key to use the program\n";
     cout << "Name@roll_no\n";
     cin >> pin;
     int found = KMP_search(pin, security);
-    if (found != -1) 
-        {
+    if (found != -1)
+    {
         cout << "Security key matched. Access granted!\n";
 
         int choice;
         while (1)
-            {
+        {
             cout << "Menu\n";
             cout << "1 - Library management\n";
             cout << "2 - Public safety management\n";
             cout << "3 - Time calculation between two places\n";
+            cout << "4 - Sort books\n";
+            cout << "5 - Graph Algorithms\n";
             cout << "Any other option to exit\n";
             cout << "Enter choice\n";
             cin >> choice;
-            switch (choice) 
+            switch (choice)
             {
                 case 1:
                     executeLibraryFunctionality();
@@ -382,15 +467,74 @@ int main()
                 case 3:
                     executeTimeCalculation();
                     break;
+                case 4:
+                    cout << "Choose sorting algorithm:\n";
+                    cout << "1 - Merge Sort\n";
+                    cout << "2 - Heap Sort\n";
+                    cout << "3 - Quick Sort\n";
+                    int sortChoice;
+                    cin >> sortChoice;
+                    switch (sortChoice)
+                    {
+                        case 1:
+                            merge(list, 0, global_count4 - 1);
+                            break;
+                        case 2:
+                            heapSort(list);
+                            break;
+                        case 3:
+                            quickSort(list, 0, global_count4 - 1);
+                            break;
+                        default:
+                            cout << "Invalid choice.\n";
+                            break;
+                    }
+                    cout << "Books sorted!\n";
+                    break;
+                case 5:
+                    cout << "Choose graph algorithm:\n";
+                    cout << "1 - BFS\n";
+                    cout << "2 - Kruskal\n";
+                    cout << "3 - Dijkstra\n";
+                    int graphChoice;
+                    cin >> graphChoice;
+                    switch (graphChoice)
+                    {
+                        case 1:
+                            {
+                                vector<vector<int>> adjList = {{1, 2}, {0, 3}, {0, 3}, {1, 2}};
+                                bfs(adjList, 0);
+                            }
+                            break;
+                        case 2:
+                            {
+                                vector<Edge> edges = {{0, 1, 10}, {0, 2, 6}, {1, 2, 5}, {2, 3, 4}};
+                                kruskal(4, edges);
+                            }
+                            break;
+                        case 3:
+                            {
+                                vector<vector<pair<int, int>>> adjList = {
+                                    {{1, 10}, {2, 5}},
+                                    {{0, 10}, {2, 2}, {3, 1}},
+                                    {{0, 5}, {1, 2}, {3, 9}},
+                                    {{1, 1}, {2, 9}}
+                                };
+                                dijkstra(adjList, 0);
+                            }
+                            break;
+                        default:
+                            cout << "Invalid choice.\n";
+                            break;
+                    }
+                    break;
                 default:
                     cout << "Exiting...\n";
                     return 0; // Exit the program
             }
         }
-    } 
-    
+    }
     else
-        
     {
         cout << "Security key not matched. You cannot continue with the program\n";
     }
